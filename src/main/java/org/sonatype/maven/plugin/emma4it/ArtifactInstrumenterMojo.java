@@ -96,6 +96,14 @@ public class ArtifactInstrumenterMojo
     private String[] excludes;
 
     /**
+     * Specifies the instrumentation output mode. Valid values for this property are:
+     *     copy (default): copy only instrumented class files and archive entries into destdir directory.
+     *     overwrite: overwrite input class files and archives.
+     *     fullcopy: copy all (instrumented or not) class files and archives to destdir/classes and destdir/lib, respectively.
+     * See http://emma.sourceforge.net/reference/ch02s03.html#tool-ref.instr.description for more information.
+     *
+     * TODO: fullcopy and copy don't work in here because setInstrOutDir is always set to null. The underlying Emma
+     * library ignores that argument if outputMode is 'overwrite' (the default here), but otherwise this fails.
      * @parameter default-value="overwrite"
      */
     private String outputMode;
